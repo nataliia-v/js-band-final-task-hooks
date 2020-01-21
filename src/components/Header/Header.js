@@ -30,7 +30,7 @@ function Header({ actions, internName, isAuthorized, userData, totalCartItems })
           <CartLink totalCartItems={totalCartItems} />
 
           <div>
-            <Button onClick={signOut} className="btn btn-primary">a
+            <Button onClick={signOut} className="btn btn-primary">
               Sign Out
             </Button>
           </div>
