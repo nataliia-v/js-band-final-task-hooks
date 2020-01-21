@@ -47,46 +47,6 @@ function Routes({ actions, isInitializedLayout }) {
   );
 }
 
-// class Routes extends Component {
-//   componentDidMount() {
-//     const { actions } = this.props;
-//
-//     actions.auth();
-//   }
-//
-//   render() {
-//     const { isInitializedLayout } = this.props;
-//
-//     return (
-//       <>
-//         {isInitializedLayout && (
-//           <Switch>
-//             <Route
-//               path="/signin"
-//               component={withAuth({ isPublic: true })(SignIn)}
-//               exact
-//             />
-//
-//             <Route path="/books" component={withAuth({})(Books)} exact />
-//             <Route
-//               path="/books/:id"
-//               component={withAuth({})(BookDetails)}
-//               exact
-//             />
-//             <Route path="/cart" component={withAuth({})(Cart)} exact />
-//
-//             <Redirect from="/" to="/books" exact />
-//
-//             <Route path="*">
-//               <NotFound />
-//             </Route>
-//           </Switch>
-//         )}
-//       </>
-//     );
-//   }
-// }
-
 const mapStateToProps = state => ({
   isInitializedLayout: getIsInitializedLayout(state)
 });
