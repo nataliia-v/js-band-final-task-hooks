@@ -1,0 +1,12 @@
+.wrapper {
+  max-width: 95%;
+  margin: 0 auto;
+}
+
+.booksList {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}

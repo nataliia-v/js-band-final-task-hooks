@@ -1,0 +1,25 @@
+.wrapper {
+  width: 250px;
+  margin-bottom: 20px;
+
+  &:not(:last-child) {
+    margin-right: 10px;
+  }
+}
+
+.title {
+  font-weight: bold;
+}
+
+.cardBody {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.cardFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
