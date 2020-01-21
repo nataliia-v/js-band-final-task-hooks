@@ -12,9 +12,8 @@ import CartLink from './component/CartLink/CartLink';
 
 import styles from './Header.module.scss';
 
-function Header(props) {
+function Header({ actions, internName, isAuthorized, userData, totalCartItems }) {
 
-  const { actions, internName, isAuthorized, userData, totalCartItems } = props;
 
   function signOut(event) {
     event.preventDefault();

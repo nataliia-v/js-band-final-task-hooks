@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useEffect } from "react";
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
@@ -13,48 +13,34 @@ import AddToCartForm from './components/AddToCartForm/AddToCartForm';
 
 import styles from './BookDetails.module.scss';
 
-class BookDetails extends Component {
-  componentDidMount = () => {
-    this.fetchBook();
-  };
 
-  componentDidUpdate(prevProps) {
-    const { match } = this.props;
-    if (prevProps.match.params.id !== match.params.id && match.params.id) {
-      this.fetchBook();
-    }
-  }
 
-  fetchBook = () => {
-    const {
-      history,
-      match: {
-        params: { id }
-      },
-      actions
-    } = this.props;
+function BookDetails({book, cartBook, isLoading, match, history,
+                       match: {
+                         params: { id }
+                       },
+                       actions}) {
 
+
+/// Fetch Book
+  useEffect(() => {
     actions.fetchBook(history, { id });
-  };
+  },[match.params.id, actions, history, id]);
 
-  onSubmit = payload => {
-    const { actions, book } = this.props;
+  if (isLoading) {
+      return <Spinner />;
+    }
+
+   const onSubmit = payload => {
     actions.addBookToCart({ ...payload, ...book });
     actions.addToastThunk({
       message: `${book.title} has been added to the cart.`
     });
   };
 
-  render() {
-    const { book, cartBook, isLoading } = this.props;
-
-    if (isLoading) {
-      return <Spinner />;
-    }
-
-    return (
-      <div className={styles.bookWrap}>
-        {book && (
+  return (
+    <div className={styles.bookWrap}>
+            {book && (
           <div key={book.id}>
             <div className={styles.book}>
               <img className={styles.img} src={book.cover} alt="book" />
@@ -65,7 +51,6 @@ class BookDetails extends Component {
                 <div className={styles.info}>
                   <span>Tags: </span>
                   {book.tags.map(tag => (
-                    // console.log(tag)
                     <span key={tag}>{tag}</span>
                   ))}
                 </div>
@@ -74,16 +59,16 @@ class BookDetails extends Component {
                 {...book}
                 cartBook={cartBook}
                 classes={{ root: styles.cartForm }}
-                onSubmit={this.onSubmit}
+                onSubmit={onSubmit}
               />
             </div>
             <p>Description: {book.description}</p>
           </div>
         )}
       </div>
-    );
-  }
+  );
 }
+
 const mapStateToProps = (
   state,
   {
