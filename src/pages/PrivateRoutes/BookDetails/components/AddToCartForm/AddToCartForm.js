@@ -1,71 +1,54 @@
-import React, { Component } from 'react';
-import classNames from 'classnames';
+import React, { useState } from "react";
+import classNames from "classnames";
 
-import KeyValuePair from 'components/KeyValuePair/KeyValuePair';
-import Counter from 'components/Forms/Counter/Counter';
-import Button from 'components/Button/Button';
+import KeyValuePair from "components/KeyValuePair/KeyValuePair";
+import Counter from "components/Forms/Counter/Counter";
+import Button from "components/Button/Button";
 
-import styles from './AddToCartForm.module.scss';
+import styles from "./AddToCartForm.module.scss";
 
-class AddToCartForm extends Component {
-  constructor(props) {
-    super(props);
+function AddToCartForm({ price, count, classes, cartBook, onSubmit }) {
 
-    this.state = {
-      totalPrice: props.cartBook ? props.cartBook.totalPrice : 0,
-      totalCount: props.cartBook ? props.cartBook.totalCount : 0
-    };
-  }
+  const [totalPrice, setToalPrice] = useState(cartBook ? cartBook.totalPrice : 0);
+  const [totalCount, setTotalCount] = useState(cartBook ? cartBook.totalCount : 0);
 
-  handleCountChange = e => {
-    const { price } = this.props;
+  const wrapperClass = classNames(styles.wrapper, classes.root);
+
+  const handleCountChange = e => {
     const { value } = e.currentTarget;
-
-    this.setState({
-      totalCount: value,
-      totalPrice: (value * price).toFixed(2)
-    });
+    setTotalCount(value);
+    setToalPrice((value * price).toFixed(2));
   };
 
-  handleSubmit = e => {
+  const handleSubmit = e => {
     e.preventDefault();
-
-    const { onSubmit } = this.props;
-
-    onSubmit(this.state);
+    onSubmit({ totalPrice, totalCount });
   };
 
-  render() {
-    const { price, count, classes } = this.props;
-    const { totalPrice, totalCount } = this.state;
+  return (
+    <form className={ wrapperClass } onSubmit={ handleSubmit }>
+      <KeyValuePair title="Price, $" value={ price }/>
+      <KeyValuePair
+        title="Count"
+        value={
+          <Counter
+            name="totalCount"
+            value={ totalCount }
+            min={ 0 }
+            max={ count }
+            onChange={ handleCountChange }
+          />
+        }
+      />
+      <KeyValuePair title="Total price" value={ totalPrice }/>
 
-    const wrapperClass = classNames(styles.wrapper, classes.root);
-
-    return (
-      <form className={wrapperClass} onSubmit={this.handleSubmit}>
-        <KeyValuePair title="Price, $" value={price} />
-        <KeyValuePair
-          title="Count"
-          value={
-            <Counter
-              name="totalCount"
-              value={totalCount}
-              min={0}
-              max={count}
-              onChange={this.handleCountChange}
-            />
-          }
-        />
-        <KeyValuePair title="Total price" value={totalPrice} />
-
-        <div className={styles.footer}>
-          <Button type="submit" disabled={!totalCount}>
-            Add to cart
-          </Button>
-        </div>
-      </form>
-    );
-  }
+      <div className={ styles.footer }>
+        <Button type="submit" disabled={ !totalCount }>
+          Add to cart
+        </Button>
+      </div>
+    </form>
+  );
 }
 
 export default AddToCartForm;
