@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/js-band-final-task-hooks/static/css/main.2ae93c24.chunk.css",
+    "main.js": "/js-band-final-task-hooks/static/js/main.938cb10c.chunk.js",
+    "main.js.map": "/js-band-final-task-hooks/static/js/main.938cb10c.chunk.js.map",
+    "runtime-main.js": "/js-band-final-task-hooks/static/js/runtime-main.cf04b7d7.js",
+    "runtime-main.js.map": "/js-band-final-task-hooks/static/js/runtime-main.cf04b7d7.js.map",
+    "static/js/2.2522908b.chunk.js": "/js-band-final-task-hooks/static/js/2.2522908b.chunk.js",
+    "static/js/2.2522908b.chunk.js.map": "/js-band-final-task-hooks/static/js/2.2522908b.chunk.js.map",
+    "index.html": "/js-band-final-task-hooks/index.html",
+    "precache-manifest.24b58a740d66de3d2da48ca777bf9af6.js": "/js-band-final-task-hooks/precache-manifest.24b58a740d66de3d2da48ca777bf9af6.js",
+    "service-worker.js": "/js-band-final-task-hooks/service-worker.js",
+    "static/css/main.2ae93c24.chunk.css.map": "/js-band-final-task-hooks/static/css/main.2ae93c24.chunk.css.map",
+    "static/media/cart2.3abf384f.svg": "/js-band-final-task-hooks/static/media/cart2.3abf384f.svg",
+    "static/media/user.8547ceae.svg": "/js-band-final-task-hooks/static/media/user.8547ceae.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.cf04b7d7.js",
+    "static/js/2.2522908b.chunk.js",
+    "static/css/main.2ae93c24.chunk.css",
+    "static/js/main.938cb10c.chunk.js"
+  ]
+}
