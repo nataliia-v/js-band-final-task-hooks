@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
@@ -12,22 +12,27 @@ import AddToCartForm from './components/AddToCartForm/AddToCartForm';
 
 import styles from './BookDetails.module.scss';
 
-function BookDetails({book, cartBook, isLoading, match, history,
-                       match: {
-                         params: { id }
-                       },
-                       actions}) {
-
-/// Fetch Book
+function BookDetails({
+  book,
+  cartBook,
+  isLoading,
+  match,
+  history,
+  match: {
+    params: { id }
+  },
+  actions
+}) {
+  // / Fetch Book
   useEffect(() => {
     actions.fetchBook(history, { id });
-  },[match.params.id, actions, history, id]);
+  }, [match.params.id, actions, history, id]);
 
   if (isLoading) {
-      return <Spinner />;
-    }
+    return <Spinner />;
+  }
 
-   const onSubmit = payload => {
+  const onSubmit = payload => {
     actions.addBookToCart({ ...payload, ...book });
     actions.addToastThunk({
       message: `${book.title} has been added to the cart.`
@@ -36,32 +41,32 @@ function BookDetails({book, cartBook, isLoading, match, history,
 
   return (
     <div className={styles.bookWrap}>
-            {book && (
-          <div key={book.id}>
-            <div className={styles.book}>
-              <img className={styles.img} src={book.cover} alt="book" />
-              <div className={styles.bookInfo}>
-                <h5 className={styles.title}>Book name: {book.title}</h5>
-                <p className={styles.info}>Author: {book.author}</p>
-                <p className={styles.info}>Level: {book.level}</p>
-                <div className={styles.info}>
-                  <span>Tags: </span>
-                  {book.tags.map(tag => (
-                    <span key={tag}>{tag}</span>
-                  ))}
-                </div>
+      {book && (
+        <div key={book.id}>
+          <div className={styles.book}>
+            <img className={styles.img} src={book.cover} alt="book" />
+            <div className={styles.bookInfo}>
+              <h5 className={styles.title}>Book name: {book.title}</h5>
+              <p className={styles.info}>Author: {book.author}</p>
+              <p className={styles.info}>Level: {book.level}</p>
+              <div className={styles.info}>
+                <span>Tags: </span>
+                {book.tags.map(tag => (
+                  <span key={tag}>{tag}</span>
+                ))}
               </div>
-              <AddToCartForm
-                {...book}
-                cartBook={cartBook}
-                classes={{ root: styles.cartForm }}
-                onSubmit={onSubmit}
-              />
             </div>
-            <p>Description: {book.description}</p>
+            <AddToCartForm
+              {...book}
+              cartBook={cartBook}
+              classes={{ root: styles.cartForm }}
+              onSubmit={onSubmit}
+            />
           </div>
-        )}
-      </div>
+          <p>Description: {book.description}</p>
+        </div>
+      )}
+    </div>
   );
 }
 
