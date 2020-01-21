@@ -8,19 +8,15 @@ import { getBooksIsLoading, getBookById } from 'store/books/selectors';
 import { addToastThunk } from 'store/layout/thunks';
 import { getCartBookById } from 'store/cart/selectors';
 import Spinner from 'components/Spinner/Spinner';
-
 import AddToCartForm from './components/AddToCartForm/AddToCartForm';
 
 import styles from './BookDetails.module.scss';
-
-
 
 function BookDetails({book, cartBook, isLoading, match, history,
                        match: {
                          params: { id }
                        },
                        actions}) {
-
 
 /// Fetch Book
   useEffect(() => {
